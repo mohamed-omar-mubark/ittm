@@ -21,8 +21,12 @@
 
     <q-footer>
       <q-tabs>
-        <q-route-tab to="/" icon="list" label="Todo" />
-        <q-route-tab to="/settings" icon="settings" label="Settings" />
+        <q-route-tab
+          v-for="nav in navs"
+          :key="nav.id"
+          :to="nav.to"
+          :icon="nav.icon"
+          :label="nav.label" />
       </q-tabs>
     </q-footer>
 
@@ -39,26 +43,16 @@
         </q-item-label>
 
         <q-item
-          to="/"
+          v-for="nav in navs"
+          :key="nav.id"
+          :to="nav.to"
           exact
           clickable>
           <q-item-section avatar>
-            <q-icon name="list" />
+            <q-icon :name="nav.icon" />
           </q-item-section>
           <q-item-section>
-            <q-item-label>Todo</q-item-label>
-          </q-item-section>
-        </q-item>
-
-        <q-item
-          to="/settings"
-          exact
-          clickable>
-          <q-item-section avatar>
-            <q-icon name="settings" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Settings</q-item-label>
+            <q-item-label>{{ nav.label }}</q-item-label>
           </q-item-section>
         </q-item>
       </q-list>
@@ -75,6 +69,26 @@ import { ref } from 'vue'
 
 export default {
   name: 'MainLayout',
+
+  data() {
+    return {
+      // sidebar navigation
+      navs: [
+        {
+          id: 1,
+          label: 'Todo',
+          icon: 'list',
+          to: '/',
+        },
+        {
+          id: 2,
+          label: 'Settings',
+          icon: 'settings',
+          to: '/settings',
+        },
+      ],
+    }
+  },
 
   setup () {
     const leftDrawerOpen = ref(false)
