@@ -59,7 +59,7 @@ import { mapActions } from 'vuex';
 export default {
   props: ['task', 'id'],
   methods: {
-    ...mapActions('tasks', ['updateTask']),
+    ...mapActions('tasks', ['updateTask', 'deleteTask']),
     // promptToDelete
     promptToDelete(id) {
       this.$q.dialog({
@@ -73,7 +73,7 @@ export default {
         },
         persistent: true
       }).onOk(() => {
-        console.log('Deleted')
+        this.deleteTask(id);
       });
     }
   },
