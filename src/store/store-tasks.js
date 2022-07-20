@@ -1,27 +1,24 @@
 const state = {
-  tasks: [
-    {
-      id: 1,
+  tasks: {
+    'ID1': {
       name: 'Go to shop',
       completed: false,
       dueDate: '2022-08-01',
       dueTime: '02:30'
     },
-    {
-      id: 2,
+    'ID2': {
       name: 'Get bananas',
       completed: false,
       dueDate: '2022-08-02',
       dueTime: '03:00'
     },
-    {
-      id: 3,
+    'ID3': {
       name: 'Get apple',
       completed: false,
       dueDate: '2022-08-03',
       dueTime: '05:45'
     },
-  ]
+  }
 }
 
 const mutations = {
