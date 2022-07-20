@@ -32,6 +32,7 @@
 
     <q-drawer
       v-model="leftDrawerOpen"
+      :breakpoint="767"
       show-if-above
       bordered
     >
@@ -102,3 +103,11 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+@media screen and (min-width: 768px) {
+  .q-footer {
+    display: none;
+  }
+}
+</style>
