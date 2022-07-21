@@ -18,9 +18,11 @@
             outlined
             v-model="taskData.name"
             :rules="[val => !!val || 'Field is required']"
+            autofocus
             ref="name"
             label="Task name"
             class="col"
+            clearable
           ></q-input>
         </div>
 
@@ -28,7 +30,8 @@
           <q-input
             outlined
             label="Due date"
-            v-model="taskData.dueDate">
+            v-model="taskData.dueDate"
+            clearable>
             <template v-slot:append>
               <q-icon name="event" class="cursor-pointer">
                 <q-popup-proxy cover transition-show="scale" transition-hide="scale">
@@ -43,11 +46,14 @@
           </q-input>
         </div>
 
-        <div class="row q-mb-sm">
+        <div
+          v-if="taskData.dueDate"
+          class="row q-mb-sm">
           <q-input
             outlined
             label="Due time"
-            v-model="taskData.dueTime">
+            v-model="taskData.dueTime"
+            clearable>
             <template v-slot:append>
               <q-icon name="access_time" class="cursor-pointer">
                 <q-popup-proxy cover transition-show="scale" transition-hide="scale">
