@@ -4,18 +4,10 @@
 
     <q-form @submit.prevent="submitForm">
       <q-card-section>
-        <div class="row q-mb-sm">
-          <q-input
-            outlined
-            v-model="taskData.name"
-            :rules="[val => !!val || 'Field is required']"
-            autofocus
-            ref="name"
-            label="Task name"
-            class="col"
-            clearable
-          ></q-input>
-        </div>
+        <modal-task-name
+          :name="taskData.name"
+          @update:name="taskData.name = $event"
+        ></modal-task-name>
 
         <div class="row q-mb-sm">
           <q-input
@@ -68,6 +60,8 @@
           color="primary"
           type="submit" />
       </q-card-actions>
+
+      <pre>{{ taskData }}</pre>
     </q-form>
   </q-card>
 </template>
@@ -77,9 +71,6 @@
 import { mapActions } from 'vuex'
 
 export default {
-  components: {
-    'modal-header': require('../modals/shared/ModalHeader.vue').default,
-  },
   data() {
     return {
       taskData: {
@@ -104,7 +95,11 @@ export default {
       this.addTask(this.taskData)
       this.$emit('close')
     }
-  }
+  },
+  components: {
+    'modal-header': require('../modals/shared/ModalHeader.vue').default,
+    'modal-task-name': require('../modals/shared/ModalTaskName.vue').default,
+  },
 };
 </script>
 
