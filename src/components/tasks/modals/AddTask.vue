@@ -11,7 +11,7 @@
         icon="close" />
     </q-card-section>
 
-    <q-form @submit.prevent="addTask">
+    <q-form @submit.prevent="submitForm">
       <q-card-section>
         <div class="row q-mb-sm">
           <q-input
@@ -65,7 +65,6 @@
 
       <q-card-actions align="right">
         <q-btn
-          flat
           label="Save"
           color="primary"
           type="submit" />
@@ -75,6 +74,9 @@
 </template>
 
 <script>
+// import mapActions
+import { mapActions } from 'vuex'
+
 export default {
   data() {
     return {
@@ -87,16 +89,18 @@ export default {
     };
   },
   methods: {
-    // Add new task
-    addTask() {
-      // this.$refs.name.validate();
+    // add task
+    ...mapActions('tasks', ['addTask']),
+    // Submit form
+    submitForm() {
       if(!this.$refs.name.hasError) {
         this.submitTask();
       }
     },
     // Submit task
     submitTask() {
-      console.log('submitTask');
+      this.addTask(this.taskData)
+      this.$emit('close')
     }
   }
 };

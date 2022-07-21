@@ -1,3 +1,5 @@
+import { uid } from 'quasar'
+
 const state = {
   tasks: {
     'ID1': {
@@ -27,6 +29,10 @@ const mutations = {
   },
   deleteTask(state, id) {
     delete state.tasks[id]
+  },
+  addTask(state, payload) {
+    // push new task to the end of the array
+    state.tasks[payload.id] = payload.task
   }
 }
 
@@ -35,7 +41,15 @@ const actions = {
     commit('updateTask', payload);
   },
   deleteTask({ commit }, id) {
-  commit('deleteTask', id);
+    commit('deleteTask', id);
+  },
+  addTask({ commit }, task) {
+    let taskId = uid();
+    let payload = {
+      id: taskId,
+      task: task
+    }
+    commit('addTask', payload);
   }
 }
 
