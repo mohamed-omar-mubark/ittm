@@ -66,7 +66,10 @@
 
     <!-- edit task modal -->
     <q-dialog v-model="showEditTask">
-      <edit-task @close="showEditTask = false" />
+      <edit-task
+        @close="showEditTask = false"
+        :task="task"
+        :id="id" />
     </q-dialog>
   </q-item>
 </template>

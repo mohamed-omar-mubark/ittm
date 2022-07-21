@@ -6,7 +6,6 @@
       @update:modelValue="event => $emit('update:name', event)"
       :rules="[val => !!val || 'Field is required']"
       autofocus
-      ref="name"
       label="Task name"
       class="col"
       clearable

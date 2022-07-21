@@ -1,12 +1,13 @@
 <template>
   <q-card>
-    <modal-header>Add Task</modal-header>
+    <modal-header>Edit Task</modal-header>
 
     <q-form @submit.prevent="submitForm">
       <q-card-section>
         <modal-task-name
           :name="taskData.name"
           @update:name="taskData.name = $event"
+          ref="name"
         ></modal-task-name>
 
         <modal-due-date
@@ -36,19 +37,24 @@
 import { mapActions } from 'vuex'
 
 export default {
+  components: {
+    'modal-header': require('components/tasks/modals/shared/ModalHeader.vue').default,
+    'modal-task-name': require('components/tasks/modals/shared/ModalTaskName.vue').default,
+    'modal-due-date': require('components/tasks/modals/shared/ModalDueDate.vue').default,
+    'modal-due-time': require('components/tasks/modals/shared/ModalDueTime.vue').default
+  },
+  props: ['task', 'id'],
   data() {
     return {
-      taskData: {
-        name: '',
-        dueDate: '',
-        dueTime: '',
-        completed: false
-      }
+      taskData: {}
     };
+  },
+  mounted() {
+    this.taskData = Object.assign({}, this.task);
   },
   methods: {
     // add task
-    ...mapActions('tasks', ['addTask']),
+    ...mapActions('tasks', ['updateTask']),
     // Submit form
     submitForm() {
       if(!this.$refs.name.hasError) {
@@ -57,16 +63,13 @@ export default {
     },
     // Submit task
     submitTask() {
-      this.addTask(this.taskData)
+      this.updateTask({
+        id: this.id,
+        updates: this.taskData
+      })
       this.$emit('close')
     }
-  },
-  components: {
-    'modal-header': require('components/tasks/modals/shared/ModalHeader.vue').default,
-    'modal-task-name': require('components/tasks/modals/shared/ModalTaskName.vue').default,
-    'modal-due-date': require('components/tasks/modals/shared/ModalDueDate.vue').default,
-    'modal-due-time': require('components/tasks/modals/shared/ModalDueTime.vue').default
-  },
+  }
 };
 </script>
 

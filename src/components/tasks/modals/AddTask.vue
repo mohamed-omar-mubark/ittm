@@ -7,6 +7,7 @@
         <modal-task-name
           :name="taskData.name"
           @update:name="taskData.name = $event"
+          ref="name"
         ></modal-task-name>
 
         <modal-due-date

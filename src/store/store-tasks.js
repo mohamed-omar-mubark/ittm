@@ -24,25 +24,19 @@ const state = {
 }
 
 const mutations = {
+  addTask(state, payload) {
+    // push new task to the end of the array
+    state.tasks[payload.id] = payload.task
+  },
   updateTask(state, payload) {
     Object.assign(state.tasks[payload.id], payload.updates)
   },
   deleteTask(state, id) {
     delete state.tasks[id]
-  },
-  addTask(state, payload) {
-    // push new task to the end of the array
-    state.tasks[payload.id] = payload.task
   }
 }
 
 const actions = {
-  updateTask({ commit }, payload) {
-    commit('updateTask', payload);
-  },
-  deleteTask({ commit }, id) {
-    commit('deleteTask', id);
-  },
   addTask({ commit }, task) {
     let taskId = uid();
     let payload = {
@@ -50,6 +44,12 @@ const actions = {
       task: task
     }
     commit('addTask', payload);
+  },
+  updateTask({ commit }, payload) {
+    commit('updateTask', payload);
+  },
+  deleteTask({ commit }, id) {
+    commit('deleteTask', id);
   }
 }
 
