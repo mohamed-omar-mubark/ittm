@@ -11,8 +11,53 @@
         icon="close" />
     </q-card-section>
 
-    <q-card-section class="q-pt-none">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum repellendus sit voluptate voluptas eveniet porro. Rerum blanditiis perferendis totam, ea at omnis vel numquam exercitationem aut, natus minima, porro labore.
+    <q-card-section>
+      <div class="row q-mb-sm">
+        <q-input
+          outlined
+          v-model="taskData.name"
+          label="Task name"
+          class="col"
+        ></q-input>
+      </div>
+
+      <div class="row q-mb-sm">
+        <q-input
+          outlined
+          label="Due date"
+          v-model="taskData.dueDate">
+          <template v-slot:append>
+            <q-icon name="event" class="cursor-pointer">
+              <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                <q-date v-model="taskData.dueDate">
+                  <div class="row items-center justify-end">
+                    <q-btn v-close-popup label="Close" color="primary" flat />
+                  </div>
+                </q-date>
+              </q-popup-proxy>
+            </q-icon>
+          </template>
+        </q-input>
+      </div>
+
+      <div class="row q-mb-sm">
+        <q-input
+          outlined
+          label="Due time"
+          v-model="taskData.dueTime">
+          <template v-slot:append>
+            <q-icon name="access_time" class="cursor-pointer">
+              <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                <q-time v-model="taskData.dueTime">
+                  <div class="row items-center justify-end">
+                    <q-btn v-close-popup label="Close" color="primary" flat />
+                  </div>
+                </q-time>
+              </q-popup-proxy>
+            </q-icon>
+          </template>
+        </q-input>
+      </div>
     </q-card-section>
 
     <q-card-actions align="right">
@@ -27,7 +72,16 @@
 
 <script>
 export default {
-
+  data() {
+    return {
+      taskData: {
+        name: '',
+        dueDate: '',
+        dueTime: '',
+        completed: false
+      }
+    };
+  },
 };
 </script>
 
