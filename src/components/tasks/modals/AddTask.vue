@@ -1,15 +1,6 @@
 <template>
   <q-card>
-    <q-card-section class="row">
-      <div class="text-h6">Add Task</div>
-      <q-space />
-      <q-btn
-        v-close-popup
-        flat
-        round
-        dense
-        icon="close" />
-    </q-card-section>
+    <modal-header>Add Task</modal-header>
 
     <q-form @submit.prevent="submitForm">
       <q-card-section>
@@ -31,6 +22,7 @@
             outlined
             label="Due date"
             v-model="taskData.dueDate"
+            class="col"
             clearable>
             <template v-slot:append>
               <q-icon name="event" class="cursor-pointer">
@@ -53,6 +45,7 @@
             outlined
             label="Due time"
             v-model="taskData.dueTime"
+            class="col"
             clearable>
             <template v-slot:append>
               <q-icon name="access_time" class="cursor-pointer">
@@ -84,6 +77,9 @@
 import { mapActions } from 'vuex'
 
 export default {
+  components: {
+    'modal-header': require('../modals/shared/ModalHeader.vue').default,
+  },
   data() {
     return {
       taskData: {
