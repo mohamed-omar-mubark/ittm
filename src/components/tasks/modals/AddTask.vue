@@ -9,26 +9,10 @@
           @update:name="taskData.name = $event"
         ></modal-task-name>
 
-        <div class="row q-mb-sm">
-          <q-input
-            outlined
-            label="Due date"
-            v-model="taskData.dueDate"
-            class="col"
-            clearable>
-            <template v-slot:append>
-              <q-icon name="event" class="cursor-pointer">
-                <q-popup-proxy cover transition-show="scale" transition-hide="scale">
-                  <q-date v-model="taskData.dueDate">
-                    <div class="row items-center justify-end">
-                      <q-btn v-close-popup label="Close" color="primary" flat />
-                    </div>
-                  </q-date>
-                </q-popup-proxy>
-              </q-icon>
-            </template>
-          </q-input>
-        </div>
+        <modal-due-date
+          :dueDate="taskData.dueDate"
+          @update:dueDate="taskData.dueDate = $event"
+        ></modal-due-date>
 
         <div
           v-if="taskData.dueDate"
@@ -99,6 +83,7 @@ export default {
   components: {
     'modal-header': require('../modals/shared/ModalHeader.vue').default,
     'modal-task-name': require('../modals/shared/ModalTaskName.vue').default,
+    'modal-due-date': require('../modals/shared/ModalDueDate.vue').default,
   },
 };
 </script>
