@@ -34,15 +34,15 @@ import { mapGetters } from 'vuex';
 export default {
   data() {
     return {
-      showAddTask: true,
+      showAddTask: false,
     };
   },
   computed: {
     ...mapGetters('tasks', ['tasks'])
   },
   components: {
-    'task': require('../components/tasks/Task.vue').default,
-    'add-task': require('../components/tasks/modals/AddTask.vue').default,
+    'task': require('components/tasks/Task.vue').default,
+    'add-task': require('components/tasks/modals/AddTask.vue').default,
   }
 }
 </script>
