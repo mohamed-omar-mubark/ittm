@@ -1,36 +1,42 @@
 <template>
-  <q-page class="q-pa-md">
+  <q-page>
+    <div class="q-pa-md absolute full-width full-height column">
+      <div class="row q-mb-lg">
+        <search />
+        <sort />
+      </div>
 
-    <div class="row q-mb-lg">
-      <search />
-      <sort />
-    </div>
+      <p v-if="search && !Object.keys(tasksTodo).length && !Object.keys(tasksCompleted).length">No search results.</p>
 
-    <p v-if="search && !Object.keys(tasksTodo).length && !Object.keys(tasksCompleted).length">No search results.</p>
+      <q-scroll-area
+        :thumb-style="thumbStyle"
+        :bar-style="barStyle"
+        class="q-scroll-area-tasks"
+      >
+        <no-tasks
+          v-if="!Object.keys(tasksTodo).length && !search"
+          @showAddTask="showAddTask = true"
+        ></no-tasks>
 
-    <div class="relative-position">
-      <no-tasks
-        v-if="!Object.keys(tasksTodo).length && !search"
-        @showAddTask="showAddTask = true"
-      ></no-tasks>
+        <tasks-todo
+          v-if="Object.keys(tasksTodo).length"
+          :tasksTodo="tasksTodo" />
 
-      <tasks-todo
-        v-if="Object.keys(tasksTodo).length"
-        :tasksTodo="tasksTodo" />
+        <tasks-completed
+          v-if="Object.keys(tasksCompleted).length"
+          :tasksCompleted="tasksCompleted"
+          class="q-mb-xl" />
+      </q-scroll-area>
 
-      <tasks-completed
-        v-if="Object.keys(tasksCompleted).length"
-        :tasksCompleted="tasksCompleted" />
-    </div>
-
-    <div class="absolute-bottom text-center q-mb-lg">
-      <q-btn
-        @click="showAddTask = true"
-        round
-        color="primary"
-        size="24px"
-        icon="add"
-      />
+      <div class="absolute-bottom text-center q-mb-lg">
+        <q-btn
+          @click="showAddTask = true"
+          round
+          color="primary"
+          size="24px"
+          icon="add"
+        />
+      </div>
     </div>
 
     <q-dialog v-model="showAddTask">
@@ -47,6 +53,21 @@ export default {
   data() {
     return {
       showAddTask: false,
+      thumbStyle: {
+        right: '1px',
+        borderRadius: '5px',
+        backgroundColor: '#405189',
+        width: '5px',
+        opacity: 0.5
+      },
+
+      barStyle: {
+        right: '1px',
+        borderRadius: '9px',
+        backgroundColor: '#027be3',
+        width: '5px',
+        opacity: 0.2
+      }
     };
   },
   computed: {
@@ -65,5 +86,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.q-scroll-area-tasks {
+  display: flex;
+  flex-grow: 1;
+}
 </style>
