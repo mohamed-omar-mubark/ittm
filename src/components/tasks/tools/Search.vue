@@ -3,7 +3,9 @@
     v-model="searchField"
     outlined
     class="col"
-    label="Search">
+    label="Search"
+    ref="searchInput"
+    @focus="$refs.searchInput.select()">
 
     <template v-slot:append>
       <q-icon v-if="searchField !== ''" name="close" @click="searchField = ''" class="cursor-pointer" />
