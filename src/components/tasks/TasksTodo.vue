@@ -4,7 +4,6 @@
   >Todo</list-header>
 
   <q-list
-    v-if="Object.keys(tasksTodo).length"
     separator
     bordered>
       <task

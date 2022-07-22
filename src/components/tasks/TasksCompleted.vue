@@ -5,7 +5,6 @@
   >Completed</list-header>
 
   <q-list
-    v-if="Object.keys(tasksCompleted).length"
     separator
     bordered>
       <task
