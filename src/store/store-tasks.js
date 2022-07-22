@@ -34,6 +34,9 @@ const mutations = {
   },
   deleteTask(state, id) {
     delete state.tasks[id]
+  },
+  setSearch(state, value) {
+    state.search = value
   }
 }
 
@@ -51,6 +54,9 @@ const actions = {
   },
   deleteTask({ commit }, id) {
     commit('deleteTask', id);
+  },
+  setSearch({ commit }, value) {
+    commit('setSearch', value);
   }
 }
 

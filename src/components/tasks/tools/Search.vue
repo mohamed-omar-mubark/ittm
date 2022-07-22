@@ -13,8 +13,8 @@
 </template>
 
 <script>
-// import mapState
-import { mapState } from 'vuex'
+// import mapState and mapActions from vuex
+import { mapState, mapActions } from 'vuex'
 
 export default {
   computed: {
@@ -24,10 +24,13 @@ export default {
         return this.search
       },
       set(value){
-        console.log('set', value);
+        this.setSearch(value)
       }
     }
   },
+  methods: {
+    ...mapActions('tasks', ['setSearch'])
+  }
 };
 </script>
 
