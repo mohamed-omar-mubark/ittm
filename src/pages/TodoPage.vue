@@ -1,7 +1,12 @@
 <template>
   <q-page class="q-pa-md">
+
+    <no-tasks
+      v-if="!Object.keys(tasksTodo).length"
+    ></no-tasks>
+
     <tasks-todo
-      v-if="Object.keys(tasksTodo).length"
+      v-else
       :tasksTodo="tasksTodo" />
 
     <tasks-completed
@@ -41,6 +46,7 @@ export default {
     'add-task': require('components/tasks/modals/AddTask.vue').default,
     'tasks-todo': require('components/tasks/TasksTodo.vue').default,
     'tasks-completed': require('components/tasks/TasksCompleted.vue').default,
+    'no-tasks': require('components/tasks/NoTasks.vue').default,
   }
 }
 </script>
