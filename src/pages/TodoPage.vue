@@ -3,6 +3,7 @@
 
     <no-tasks
       v-if="!Object.keys(tasksTodo).length"
+      @showAddTask="showAddTask = true"
     ></no-tasks>
 
     <tasks-todo
