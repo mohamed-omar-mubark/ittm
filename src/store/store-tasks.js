@@ -20,7 +20,8 @@ const state = {
       dueDate: '2022-08-03',
       dueTime: '05:45'
     },
-  }
+  },
+  search: '',
 }
 
 const mutations = {
