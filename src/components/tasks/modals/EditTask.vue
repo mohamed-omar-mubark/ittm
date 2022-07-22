@@ -49,7 +49,7 @@ export default {
       taskData: {}
     };
   },
-  mounted() {
+  created() {
     this.taskData = Object.assign({}, this.task);
   },
   methods: {
