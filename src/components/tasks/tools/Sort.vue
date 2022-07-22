@@ -1,7 +1,9 @@
 <template>
   <q-select
-    v-model="model"
+    v-model="sortBy"
     :options="options"
+    emit-value
+    map-options
     class="col q-ml-sm"
     filled
     label="Sort by"
@@ -9,15 +11,20 @@
 </template>
 
 <script>
-import { ref } from 'vue'
-
 export default {
   data() {
     return {
-      model: ref(null),
+      sortBy: null,
 
       options: [
-        'Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'
+        {
+          label: 'Name',
+          value: 'name',
+        },
+        {
+          label: 'Date',
+          value: 'dueDate',
+        },
       ],
     }
   }
