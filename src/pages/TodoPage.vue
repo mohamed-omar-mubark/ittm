@@ -3,6 +3,7 @@
 
     <div class="row q-mb-lg">
       <search />
+      <sort />
     </div>
 
     <p v-if="search && !Object.keys(tasksTodo).length && !Object.keys(tasksCompleted).length">No search results.</p>
@@ -56,6 +57,7 @@ export default {
     'tasks-completed': require('components/tasks/TasksCompleted.vue').default,
     'no-tasks': require('components/tasks/NoTasks.vue').default,
     'search': require('components/tasks/tools/Search.vue').default,
+    'sort': require('components/tasks/tools/Sort.vue').default,
   }
 }
 </script>
