@@ -1,4 +1,6 @@
 <template>
+  <list-header>Completed</list-header>
+
   <q-list
     v-if="Object.keys(tasksCompleted).length"
     separator
@@ -16,6 +18,7 @@ export default {
   props: ['tasksCompleted'],
   components: {
     'task': require('components/tasks/Task.vue').default,
+    'list-header': require('components/shared/ListHeader.vue').default
   }
 };
 </script>
