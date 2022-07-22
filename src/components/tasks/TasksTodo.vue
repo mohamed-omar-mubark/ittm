@@ -1,5 +1,7 @@
 <template>
-  <list-header>Todo</list-header>
+  <list-header
+    bgColor="bg-orange-5"
+  >Todo</list-header>
 
   <q-list
     v-if="Object.keys(tasksTodo).length"

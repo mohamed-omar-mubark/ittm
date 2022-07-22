@@ -1,5 +1,8 @@
 <template>
-  <list-header>Completed</list-header>
+  <list-header
+    bgColor="bg-green-5"
+    class="q-mt-lg"
+  >Completed</list-header>
 
   <q-list
     v-if="Object.keys(tasksCompleted).length"
