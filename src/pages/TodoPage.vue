@@ -43,9 +43,10 @@
 
       <template v-else>
         <span class="absolute-center">
-          <q-spinner-cube
+          <q-spinner
             color="primary"
             size="4em"
+            :thickness="5"
           />
         </span>
       </template>

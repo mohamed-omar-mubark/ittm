@@ -75,6 +75,13 @@ const actions = {
     let userId = firebaseAuth.currentUser.uid
     let userTasks = ref(firebaseDb, 'tasks/' + userId)
 
+    // initial check for tasks
+    onValue(userTasks, (snapshot) => {
+      if (snapshot.val()) {
+        commit('setTasksDownloaded', true)
+      }
+    })
+
     onValue(userTasks, snapshot => {
       let data = snapshot.val()
       for (let i = 0; i < Object.keys(data).length; i++) {
