@@ -1,6 +1,6 @@
 import { uid } from 'quasar'
 import { firebaseDb, firebaseAuth } from 'boot/firebase'
-import { ref, onValue, onChildChanged } from 'firebase/database'
+import { ref, onValue, onChildChanged, onChildRemoved } from 'firebase/database'
 
 const state = {
   tasks: {
@@ -65,14 +65,14 @@ const actions = {
     commit('setSearch', value);
   },
   setSort({ commit }, value) {
-    commit('setSort', value);
+    commit('setSort', value)
   },
   fbReadData({ commit }) {
     let userId = firebaseAuth.currentUser.uid
     let userTasks = ref(firebaseDb, 'tasks/' + userId)
 
     onValue(userTasks, snapshot => {
-      let data = snapshot.val();
+      let data = snapshot.val()
       for (let i = 0; i < Object.keys(data).length; i++) {
         let taskId = Object.keys(data)[i];
         let task = data[taskId];
@@ -84,15 +84,17 @@ const actions = {
     })
 
     onChildChanged(userTasks, snapshot => {
-      let data = snapshot.val();
-      for (let i = 0; i < Object.keys(data).length; i++) {
-        let taskId = Object.keys(data)[i];
-        let task = data[taskId];
-        commit('updateTask', {
-          id: taskId,
-          task: task
-        })
+      let task = snapshot.val()
+      let payload = {
+        id: snapshot.key,
+        updates: task
       }
+      commit('updateTask', payload)
+    })
+
+    onChildRemoved(userTasks, snapshot => {
+      let taskId = snapshot.key;
+      commit('deleteTask', taskId)
     })
   }
 }
