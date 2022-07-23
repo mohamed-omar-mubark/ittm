@@ -42,6 +42,15 @@
           <q-icon name="chevron_right" />
         </q-item-section>
       </q-item>
+
+      <q-item @click="emailUs" tag="label" v-ripple>
+        <q-item-section>
+          <q-item-label>Email us</q-item-label>
+        </q-item-section>
+        <q-item-section side >
+          <q-icon name="chevron_right" />
+        </q-item-section>
+      </q-item>
     </q-list>
   </q-page>
 </template>
@@ -76,6 +85,9 @@ export default {
     ...mapActions('settings', ['setShow12HourTimeFormat', 'setShowTasksInOneList']),
     visitOurWebsite() {
       openURL('https://mohamed-omar.online')
+    },
+    emailUs() {
+      window.location.href = 'mailto:mohamed.omar.mubark@gmail.com?subject=ITTM Feedback'
     }
   }
 }
