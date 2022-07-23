@@ -2,15 +2,19 @@
 const routes = [
   {
     path: '/',
-    component: () => import('src/layouts/Layout.vue'),
+    component: () => import('layouts/Layout.vue'),
     children: [
       {
         path: '',
-        component: () => import('src/pages/TodoPage.vue')
+        component: () => import('pages/TodoPage.vue')
       },
       {
         path: '/settings',
-        component: () => import('src/pages/SettingsPage.vue')
+        component: () => import('pages/SettingsPage.vue')
+      },
+      {
+        path: '/settings/help',
+        component: () => import('pages/HelpPage.vue')
       }
     ]
   },
