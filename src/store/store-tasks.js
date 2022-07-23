@@ -39,6 +39,9 @@ const mutations = {
   deleteTask(state, id) {
     delete state.tasks[id]
   },
+  clearTasks(state) {
+    state.tasks = {}
+  },
   setSearch(state, value) {
     state.search = value
   },
