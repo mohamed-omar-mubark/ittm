@@ -13,6 +13,7 @@
       <q-input
         v-model="formData.email"
         :rules="[ val => isValidEmail(val) || 'Please use a valid email address.' ]"
+        ref="email"
         lazy-rules
         type="email"
         outlined
@@ -25,6 +26,7 @@
       <q-input
         v-model="formData.password"
         :rules="[ val => val.length >= 6 || 'Please use minimum 6 characters.']"
+        ref="password"
         lazy-rules
         type="password"
         outlined
@@ -59,7 +61,11 @@ export default {
       return re.test(String(email).toLowerCase());
     },
     register() {
-      console.log('registering...');
+      this.$refs.email.validate();
+      this.$refs.password.validate();
+      if (!this.$refs.email.hasError && !this.$refs.password.hasError) {
+        console.log('Registering...');
+      }
     }
   }
 };
