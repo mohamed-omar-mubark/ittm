@@ -6,6 +6,7 @@
   >
     <div>
       <list-header
+        v-if="!settings.showTasksInOneList"
         bgColor="bg-orange-5"
       >Todo</list-header>
 
@@ -23,12 +24,18 @@
 </template>
 
 <script>
+// import mapGetters
+import { mapGetters } from 'vuex'
+
 export default {
   props: ['tasksTodo'],
   components: {
     'task': require('components/tasks/Task.vue').default,
     'list-header': require('components/shared/ListHeader.vue').default
-  }
+  },
+  computed: {
+    ...mapGetters('settings', ['settings'])
+  },
 };
 </script>
 
