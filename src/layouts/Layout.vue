@@ -7,11 +7,20 @@
         </q-toolbar-title>
 
         <q-btn
+          v-if="!loggedIn"
           to="/auth"
           flat
           class="absolute-right"
           icon-right="account_circle"
           label="Login" />
+
+        <q-btn
+          v-else
+          to="/auth"
+          flat
+          class="absolute-right"
+          icon-right="account_circle"
+          label="Logout" />
       </q-toolbar>
     </q-header>
 
@@ -63,6 +72,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { ref } from 'vue'
 
 export default {
@@ -87,7 +97,6 @@ export default {
       ],
     }
   },
-
   setup () {
     const leftDrawerOpen = ref(false)
 
@@ -97,7 +106,10 @@ export default {
         leftDrawerOpen.value = !leftDrawerOpen.value
       }
     }
-  }
+  },
+  computed: {
+    ...mapState('auth', ['loggedIn']),
+  },
 }
 </script>
 
