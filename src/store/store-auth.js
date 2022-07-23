@@ -1,5 +1,5 @@
 import { firebaseAuth } from 'boot/firebase'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth'
 
 const state = {
   loggedIn: false
@@ -29,6 +29,9 @@ const actions = {
     .catch(error => {
       console.log('error message', error.message)
     })
+  },
+  logoutUser () {
+    signOut(firebaseAuth)
   },
   handleAuthStateChanged ({ commit }) {
     firebaseAuth.onAuthStateChanged(user => {
