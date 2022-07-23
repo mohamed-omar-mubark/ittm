@@ -1,4 +1,6 @@
 import { uid } from 'quasar'
+import { firebaseDb, firebaseAuth } from 'boot/firebase'
+import { ref, onValue } from 'firebase/database'
 
 const state = {
   tasks: {
@@ -66,7 +68,25 @@ const actions = {
     commit('setSort', value);
   },
   fbReadData({ commit }) {
-    console.log('fbReadData');
+    let userId = firebaseAuth.currentUser.uid
+    let userTasks = ref(firebaseDb, 'tasks/' + userId)
+
+    onValue(userTasks, snapshot => {
+      let data = snapshot.val();
+      for (let i = 0; i < Object.keys(data).length; i++) {
+        let taskId = Object.keys(data)[i];
+        let task = data[taskId];
+        commit('addTask', {
+          id: taskId,
+          task: task
+        })
+      }
+      // let payload = {
+      //   id: snapshot.key,
+      //   taks: data
+      // }
+      // commit('addTask', payload)
+    });
   }
 }
 
@@ -76,8 +96,8 @@ const getters = {
         keysOrdered = Object.keys(state.tasks)
 
     keysOrdered.sort((a, b) => {
-      let taskAProp = state.tasks[a][state.sort].toLowerCase(),
-          taskBProp = state.tasks[b][state.sort].toLowerCase()
+      let taskAProp = state.tasks[a][state.sort],
+          taskBProp = state.tasks[b][state.sort]
 
       if (taskAProp > taskBProp) return 1
       else if (taskAProp < taskBProp) return -1
