@@ -1,11 +1,11 @@
 <template>
-  <q-form @submit.prevent="register">
+  <q-form @submit.prevent="submitForm">
     <div class="row q-mb-md">
       <q-banner class="bg-grey-3 col">
         <template v-slot:avatar>
           <q-icon name="account_circle" color="primary" />
         </template>
-        Register to access your todos anywhere!
+        {{ tab }} to access your todos anywhere!
       </q-banner>
     </div>
 
@@ -39,7 +39,7 @@
       <q-space />
       <q-btn
         color="primary"
-        label="Register"
+        :label="tab"
         type="submit" />
     </div>
   </q-form>
@@ -61,7 +61,7 @@ export default {
       var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(String(email).toLowerCase());
     },
-    register() {
+    submitForm() {
       this.$refs.email.validate();
       this.$refs.password.validate();
       if (!this.$refs.email.hasError && !this.$refs.password.hasError) {
@@ -72,7 +72,7 @@ export default {
         }
       }
     }
-  }
+  },
 };
 </script>
 
