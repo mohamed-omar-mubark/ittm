@@ -1,6 +1,6 @@
 import { uid } from 'quasar'
 import { firebaseDb, firebaseAuth } from 'boot/firebase'
-import { ref, set, onValue, onChildChanged, onChildRemoved } from 'firebase/database'
+import { ref, set, update, onValue, onChildChanged, onChildRemoved } from 'firebase/database'
 
 const state = {
   tasks: {
@@ -55,8 +55,8 @@ const actions = {
     }
     dispatch('fbAddTask', payload);
   },
-  updateTask({ commit }, payload) {
-    commit('updateTask', payload);
+  updateTask({ dispatch }, payload) {
+    dispatch('fbUpdateTask', payload);
   },
   deleteTask({ commit }, id) {
     commit('deleteTask', id);
@@ -102,7 +102,13 @@ const actions = {
     let userId = firebaseAuth.currentUser.uid
     let taskRef = ref(firebaseDb, 'tasks/' + userId + '/' + payload.id)
     set(taskRef, payload.task)
-  }
+  },
+
+  fbUpdateTask({}, payload) {
+    let userId = firebaseAuth.currentUser.uid
+    let taskRef = ref(firebaseDb, 'tasks/' + userId + '/' + payload.id)
+    update(taskRef, payload.updates)
+  },
 }
 
 const getters = {
