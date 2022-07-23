@@ -42,7 +42,12 @@
       </template>
 
       <template v-else>
-        <p>loading...</p>
+        <span class="absolute-center">
+          <q-spinner-cube
+            color="primary"
+            size="4em"
+          />
+        </span>
       </template>
     </div>
 
