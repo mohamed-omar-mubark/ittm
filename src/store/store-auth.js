@@ -1,4 +1,4 @@
-import { LocalStorage } from 'quasar'
+import { LocalStorage, Loading } from 'quasar'
 import { firebaseAuth } from 'boot/firebase'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth'
 import { showErrorMessage } from 'src/functions/function-show-error-message'
@@ -24,6 +24,7 @@ const actions = {
     })
   },
   loginUser ({}, payload) {
+    Loading.show()
     signInWithEmailAndPassword(firebaseAuth, payload.email, payload.password)
     .then(response => {
       console.log(response)
@@ -37,6 +38,7 @@ const actions = {
   },
   handleAuthStateChanged ({ commit }) {
     firebaseAuth.onAuthStateChanged(user => {
+      Loading.hide()
       if (user) {
         commit('setLoggedIn', true)
         LocalStorage.set('loggedIn', true)
