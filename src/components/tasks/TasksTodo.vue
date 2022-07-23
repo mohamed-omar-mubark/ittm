@@ -24,7 +24,6 @@
 </template>
 
 <script>
-// import mapGetters
 import { mapGetters } from 'vuex'
 
 export default {

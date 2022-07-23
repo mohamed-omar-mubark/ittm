@@ -56,7 +56,6 @@
 </template>
 
 <script>
-// import mapGetters and mapActions from vuex
 import { mapGetters, mapActions } from 'vuex';
 // import openUrl
 import { openURL } from 'quasar';

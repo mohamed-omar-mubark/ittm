@@ -76,7 +76,6 @@
 </template>
 
 <script>
-// import mapActions and mapGetters from vuex
 import { mapActions, mapGetters } from 'vuex'
 // import date
 import { date } from 'quasar'

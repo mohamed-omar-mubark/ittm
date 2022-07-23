@@ -33,7 +33,6 @@
 </template>
 
 <script>
-// import mapActions
 import { mapActions } from 'vuex'
 // import mixins
 import mixinAddEditTask from 'src/mixins/mixin-add-edit-task'

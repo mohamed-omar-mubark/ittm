@@ -16,7 +16,6 @@
 </template>
 
 <script>
-// import mapState and mapActions from vuex
 import { mapState, mapActions } from 'vuex'
 
 export default {

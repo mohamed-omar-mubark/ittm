@@ -46,6 +46,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   props: ['tab'],
   data() {
@@ -57,6 +59,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions('auth', ['registerUser']),
     isValidEmail(email) {
       var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(String(email).toLowerCase());
@@ -68,7 +71,7 @@ export default {
         if(this.tab == 'login') {
           console.log('login');
         } else {
-          console.log('register');
+          this.registerUser(this.formData)
         }
       }
     }
