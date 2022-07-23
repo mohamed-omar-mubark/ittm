@@ -1,6 +1,6 @@
 import { uid } from 'quasar'
 import { firebaseDb, firebaseAuth } from 'boot/firebase'
-import { ref, onValue } from 'firebase/database'
+import { ref, onValue, onChildChanged } from 'firebase/database'
 
 const state = {
   tasks: {
@@ -81,12 +81,19 @@ const actions = {
           task: task
         })
       }
-      // let payload = {
-      //   id: snapshot.key,
-      //   taks: data
-      // }
-      // commit('addTask', payload)
-    });
+    })
+
+    onChildChanged(userTasks, snapshot => {
+      let data = snapshot.val();
+      for (let i = 0; i < Object.keys(data).length; i++) {
+        let taskId = Object.keys(data)[i];
+        let task = data[taskId];
+        commit('updateTask', {
+          id: taskId,
+          task: task
+        })
+      }
+    })
   }
 }
 
