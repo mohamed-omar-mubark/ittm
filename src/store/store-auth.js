@@ -1,3 +1,4 @@
+import { LocalStorage } from 'quasar'
 import { firebaseAuth } from 'boot/firebase'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth'
 
@@ -37,9 +38,11 @@ const actions = {
     firebaseAuth.onAuthStateChanged(user => {
       if (user) {
         commit('setLoggedIn', true)
+        LocalStorage.set('loggedIn', true)
         this.$router.push('/').catch(err => {})
       } else {
         commit('setLoggedIn', false)
+        LocalStorage.set('loggedIn', false)
         this.$router.replace('/auth').catch(err => {})
       }
     })
