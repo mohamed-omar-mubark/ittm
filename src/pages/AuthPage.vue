@@ -23,8 +23,7 @@
         </q-tab-panel>
 
         <q-tab-panel name="register">
-          <div class="text-h6">Register</div>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          <register />
         </q-tab-panel>
       </q-tab-panels>
     </q-card>
@@ -33,9 +32,12 @@
 
 <script>
 export default {
+  components: {
+    'register': require('components/auth/Register.vue').default,
+  },
   data() {
     return {
-      tab: 'login'
+      tab: 'register'
     }
   }
 };
