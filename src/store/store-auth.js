@@ -37,8 +37,10 @@ const actions = {
     firebaseAuth.onAuthStateChanged(user => {
       if (user) {
         commit('setLoggedIn', true)
+        this.$router.push('/').catch(err => {})
       } else {
         commit('setLoggedIn', false)
+        this.$router.replace('/auth').catch(err => {})
       }
     })
   }
