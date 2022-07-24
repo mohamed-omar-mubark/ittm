@@ -1,7 +1,7 @@
 <template>
   <q-page>
     <div class="q-pa-md absolute full-width full-height column">
-      <template v-if="tasksDownloaded.length != 0">
+      <template v-if="tasksDownloaded">
         <div class="row q-mb-lg">
           <search />
           <sort />

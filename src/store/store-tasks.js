@@ -1,6 +1,7 @@
 import { uid } from 'quasar'
 import { firebaseDb, firebaseAuth } from 'boot/firebase'
 import { ref, set, update, remove, onValue, onChildChanged, onChildRemoved } from 'firebase/database'
+import { showErrorMessage } from 'src/functions/function-show-error-message'
 
 const state = {
   tasks: {
@@ -78,15 +79,9 @@ const actions = {
     let userId = firebaseAuth.currentUser.uid
     let userTasks = ref(firebaseDb, 'tasks/' + userId)
 
-    // initial check for tasks
-    onValue(userTasks, (snapshot) => {
-      if (snapshot.val()) {
-        commit('setTasksDownloaded', true)
-      }
-    })
-
     onValue(userTasks, snapshot => {
       let data = snapshot.val()
+      commit('setTasksDownloaded', true)
       for (let i = 0; i < Object.keys(data).length; i++) {
         let taskId = Object.keys(data)[i];
         let task = data[taskId];
@@ -95,6 +90,9 @@ const actions = {
           task: task
         })
       }
+    }, error => {
+      showErrorMessage(error.message)
+      this.$router.replace('/auth')
     })
 
     onChildChanged(userTasks, snapshot => {
