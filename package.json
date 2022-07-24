@@ -6,7 +6,7 @@
   "author": "Mohamed Omar <mohamed.omar.mubark@gmail.com>",
   "private": true,
   "scripts": {
-    "test": "echo \"No test specified\" && exit 0"
+    "icons": "icongenie generate -i src/icon/AppIcon.png --skip-trim"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
