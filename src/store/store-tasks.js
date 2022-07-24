@@ -1,4 +1,4 @@
-import { uid } from 'quasar'
+import { uid, Notify } from 'quasar'
 import { firebaseDb, firebaseAuth } from 'boot/firebase'
 import { ref, set, update, remove, onValue, onChildChanged, onChildRemoved } from 'firebase/database'
 import { showErrorMessage } from 'src/functions/function-show-error-message'
@@ -114,18 +114,42 @@ const actions = {
     let userId = firebaseAuth.currentUser.uid
     let taskRef = ref(firebaseDb, 'tasks/' + userId + '/' + payload.id)
     set(taskRef, payload.task)
+    Notify.create({
+      message: 'Task added',
+      color: 'positive',
+      timeout: 2000
+    })
   },
 
   fbUpdateTask({}, payload) {
     let userId = firebaseAuth.currentUser.uid
     let taskRef = ref(firebaseDb, 'tasks/' + userId + '/' + payload.id)
     update(taskRef, payload.updates)
+    let keys = Object.keys(payload.updates)
+    if (!(keys.includes('completed') && keys.length === 1)) {
+      Notify.create({
+        message: 'Task updated',
+        color: 'positive',
+        timeout: 2000
+      })
+    } else {
+      Notify.create({
+        message: 'Task completed',
+        color: 'positive',
+        timeout: 2000
+      })
+    }
   },
 
   fbDeleteTask({}, taskId) {
     let userId = firebaseAuth.currentUser.uid
     let taskRef = ref(firebaseDb, 'tasks/' + userId + '/' + taskId)
     remove(taskRef)
+    Notify.create({
+      message: 'Task deleted',
+      color: 'negative',
+      timeout: 2000
+    })
   }
 }
 
