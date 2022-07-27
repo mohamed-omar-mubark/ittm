@@ -8,12 +8,6 @@ export const menuTemplate = [
     label: app.name,
     submenu: [
       { role: 'about' },
-      {
-        label: 'Settings',
-        click() {
-          mainWindow.webContents.send('open-settings')
-        }
-      },
       { type: 'separator' },
       { role: 'services' },
       { type: 'separator' },
@@ -27,12 +21,6 @@ export const menuTemplate = [
     label: app.name,
     submenu: [
       { role: 'about' },
-      {
-        label: 'Settings',
-        click() {
-          mainWindow.webContents.send('open-settings')
-        }
-      },
       { type: 'separator' },
       { role: 'services' },
       { type: 'separator' },
