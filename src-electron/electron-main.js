@@ -24,6 +24,8 @@ app.whenReady().then(() => {
     icon: path.resolve(__dirname, 'icons/icon.png'), // tray icon
     width: 1000,
     height: 600,
+    minWidth: 800,
+    minHeight: 500,
     useContentSize: true,
     webPreferences: {
       contextIsolation: true,
