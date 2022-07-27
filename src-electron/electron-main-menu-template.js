@@ -1,4 +1,5 @@
 import { app } from 'electron'
+import { mainWindow } from './electron-main'
 const isMac = process.platform === 'darwin'
 
 export const menuTemplate = [
@@ -7,6 +8,12 @@ export const menuTemplate = [
     label: app.name,
     submenu: [
       { role: 'about' },
+      {
+        label: 'Settings',
+        click() {
+          mainWindow.webContents.send('open-settings')
+        }
+      },
       { type: 'separator' },
       { role: 'services' },
       { type: 'separator' },
@@ -16,7 +23,26 @@ export const menuTemplate = [
       { type: 'separator' },
       { role: 'quit' }
     ]
-  }] : []),
+  }] : [{
+    label: app.name,
+    submenu: [
+      { role: 'about' },
+      {
+        label: 'Settings',
+        click() {
+          mainWindow.webContents.send('open-settings')
+        }
+      },
+      { type: 'separator' },
+      { role: 'services' },
+      { type: 'separator' },
+      { role: 'hide' },
+      { role: 'hideOthers' },
+      { role: 'unhide' },
+      { type: 'separator' },
+      { role: 'quit' }
+    ]
+  }]),
   // { role: 'fileMenu' }
   {
     label: 'File',

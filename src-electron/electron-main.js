@@ -15,7 +15,7 @@ catch (_) { }
 
 // variables and constants
 
-let mainWindow
+export let mainWindow
 
 
 
