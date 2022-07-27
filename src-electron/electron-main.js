@@ -12,12 +12,14 @@ try {
 }
 catch (_) { }
 
+// variables and constants
+
 let mainWindow
 
-function createWindow () {
-  /**
-   * Initial window options
-   */
+// app ready
+
+app.whenReady().then(() => {
+  // Initial window options
   mainWindow = new BrowserWindow({
     icon: path.resolve(__dirname, 'icons/icon.png'), // tray icon
     width: 1000,
@@ -46,18 +48,10 @@ function createWindow () {
   mainWindow.on('closed', () => {
     mainWindow = null
   })
-}
-
-app.whenReady().then(createWindow)
-
-app.on('window-all-closed', () => {
-  if (platform !== 'darwin') {
-    app.quit()
-  }
 })
 
-app.on('activate', () => {
-  if (mainWindow === null) {
-    createWindow()
-  }
+// app events
+
+app.on('window-all-closed', () => {
+  app.quit()
 })
